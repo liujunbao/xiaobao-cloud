@@ -1,0 +1,11 @@
+tcp:
+  port: 8080
+  #心跳时间，单位秒
+  heartbeat: 60
+  #是否处理粘包/拆包问题
+  package-handle: true
+rocketmq:
+  name-server: 192.168.1.82:9876
+  producer:
+    group: ch-wsd
+    send-message-timeout: 10000

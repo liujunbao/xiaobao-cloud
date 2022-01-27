@@ -1,0 +1,24 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    #useAffectedRows=true表示update返回受影响的行数，而不是匹配到行数
+    #rewriteBatchedStatements=true 用于批量操作
+    url: jdbc:mysql://localhost:3306/test?allowMultiQueries=true&useUnicode=true&useSSL=false&characterEncoding=UTF8&useAffectedRows=true&rewriteBatchedStatements=true
+    username: root
+    password: ayi901108
+  redis:
+    host: redis.119xiehui.com
+    port: 16379
+    password: chuanghui@2020
+    database: 126
+mybatis:
+  #不然会找不到mapper.xml，也就找不到里面的方法。会报错Invalid bound statement (not found)
+  mapper-locations: classpath:mapper/*.xml
+#  configuration:
+#    #打印完整的sql语句
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+logging:
+  level:
+    #打印sql语句
+    com.example.demo.module.dao: debug

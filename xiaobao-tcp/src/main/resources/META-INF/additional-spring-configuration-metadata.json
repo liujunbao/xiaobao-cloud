@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "tcp.port",
+      "type": "java.lang.String",
+      "description": "Description for tcp.port."
+    },
+    {
+      "name": "tcp.heartbeat",
+      "type": "java.lang.String",
+      "description": "Description for tcp.heartbeat."
+    },
+    {
+      "name": "tcp.package-handle",
+      "type": "java.lang.String",
+      "description": "Description for tcp.package-handle."
+    }
+  ] }

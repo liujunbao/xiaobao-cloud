@@ -1,0 +1,13 @@
+# 基础镜像
+FROM openjdk:8-jre
+# author
+MAINTAINER xiaobao
+# 指定路径 为后续的 RUN、CMD、ENTRYPOINT 指令配置工作目录。
+WORKDIR /home/xiaobao
+# 复制jar文件到容器的/目录。   复制本地主机的 <src>到容器中的 <dest>，当使用本地目录为源目录时，推荐使用 COPY。
+COPY tcp-wsd.jar /home/xiaobao/tcp-wsd.jar
+# 配置容器启动后执行的命令，并且不可被 docker run 提供的参数覆盖。
+# 每个 Dockerfile 中只能有一个 ENTRYPOINT，当指定多个时，只有最后一个起效。
+ENTRYPOINT ["java","-Duser.timezone=GMT+08","-jar","tcp-wsd.jar"]
+# 也可以这么写。$Xms和$Xmx是在docker run  -e Xms=256m -e Xmx=512m定义的，-e 代表容器运行的环境变量
+# ENTRYPOINT ["java","-Xms=$Xms -Xmx=$Xmx","-jar","tcp-wsd.jar"]

@@ -1,0 +1,47 @@
+#主版本是3,次版本是9,如果为制定次版本，则默认使用0，比如version: '3'，使用的是3.0版本
+version: '3.9'
+services:
+  xiaobao-nacos:
+    container_name: xiaobao-nacos
+    image: nacos/nacos-server:v2.0.4
+    environment:
+      - MODE=standalone # 单机模式
+    volumes:
+      # 日志挂载：容器的logs下的文件会同步到主机的logs下
+      - ./nacos/logs:/home/nacos/logs
+      # 配置挂载：主机的application.properties会覆盖容器下的application.properties
+      - ./nacos/conf/application.properties:/home/nacos/conf/application.properties
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+      - "9555:9555"
+    depends_on:
+      - xiaobao-mysql
+    restart: always
+  xiaobao-mysql:
+    image: mysql:8.0.28 # 镜像名
+    container_name: xiaobao-mysql # 容器名
+    ports: # 映射端口
+      - "13306:3306"
+    volumes:
+      - ./mysql/conf:/etc/mysql/conf.d  # 配置挂载
+      - ./mysql/logs:/logs  # 日志挂载
+      - ./mysql/data:/var/lib/mysql # 数据挂载
+      - ./mysql/init/:/docker-entrypoint-initdb.d/  # 初始化目录挂载
+    command:
+      # MySQL8的密码验证方式默认是 caching_sha2_password，但是很多的连接工具还不支持该方式
+      # 就需要手动设置下mysql的密码认证方式为以前的 mysql_native_password 方式
+      # --skip-character-set-client-handshake表示：让client端使用server端的编码
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --skip-character-set-client-handshake
+      --default-time-zone=+8:00
+      --lower_case_table_names=1
+    restart: always # 重启策略
+    environment:
+      TZ: Asia/Shanghai # 时区上海
+      MYSQL_ROOT_PASSWORD: root # root密码
+      MYSQL_DATABASE: nacos_config  # 初始化数据库(后续的初始化sql会在这个库执行)
+      MYSQL_USER: nacos # 初始化用户(不能是root 会报错, 后续需要给新用户赋予权限)
+      MYSQL_PASSWORD: nacos # 用户密码

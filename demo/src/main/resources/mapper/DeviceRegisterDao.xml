@@ -1,0 +1,798 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.module.dao.DeviceRegisterDao">
+
+    <resultMap type="com.example.demo.module.entity.DeviceRegister" id="DeviceRegisterMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="projectId" column="project_id" jdbcType="VARCHAR"/>
+        <result property="projectName" column="project_name" jdbcType="VARCHAR"/>
+        <result property="applicationId" column="application_id" jdbcType="INTEGER"/>
+        <result property="applicationName" column="application_name" jdbcType="VARCHAR"/>
+        <result property="tenantId" column="tenant_id" jdbcType="INTEGER"/>
+        <result property="deviceTypeId" column="device_type_id" jdbcType="INTEGER"/>
+        <result property="deviceTypeName" column="device_type_name" jdbcType="VARCHAR"/>
+        <result property="deviceSupplierId" column="device_supplier_id" jdbcType="INTEGER"/>
+        <result property="deviceDictId" column="device_dict_id" jdbcType="INTEGER"/>
+        <result property="deviceName" column="device_name" jdbcType="VARCHAR"/>
+        <result property="deviceId" column="device_id" jdbcType="VARCHAR"/>
+        <result property="deviceSeriesNumber" column="device_series_number" jdbcType="VARCHAR"/>
+        <result property="hardwareVersionNumber" column="hardware_version_number" jdbcType="VARCHAR"/>
+        <result property="softwareVersionNumber" column="software_version_number" jdbcType="VARCHAR"/>
+        <result property="protocolVersion" column="protocol_version" jdbcType="VARCHAR"/>
+        <result property="deviceCcid" column="device_ccid" jdbcType="VARCHAR"/>
+        <result property="deviceImei" column="device_imei" jdbcType="VARCHAR"/>
+        <result property="longitude" column="longitude" jdbcType="VARCHAR"/>
+        <result property="latitude" column="latitude" jdbcType="VARCHAR"/>
+        <result property="networkingType" column="networking_type" jdbcType="VARCHAR"/>
+        <result property="simPackage" column="sim_package" jdbcType="VARCHAR"/>
+        <result property="unitName" column="unit_name" jdbcType="VARCHAR"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="uploadInterval" column="upload_interval" jdbcType="INTEGER"/>
+        <result property="lastHeartbeatTime" column="last_heartbeat_time" jdbcType="TIMESTAMP"/>
+        <result property="onlineStatus" column="online_status" jdbcType="INTEGER"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="policeStatus" column="police_status" jdbcType="INTEGER"/>
+        <result property="serviceExpirationTime" column="service_expiration_time" jdbcType="TIMESTAMP"/>
+        <result property="battery" column="battery" jdbcType="VARCHAR"/>
+        <result property="signalStrength" column="signal_strength" jdbcType="VARCHAR"/>
+        <result property="simAbnormal" column="sim_abnormal" jdbcType="INTEGER"/>
+        <result property="isUpgrade" column="is_upgrade" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="companyId" column="company_id" jdbcType="VARCHAR"/>
+        <result property="tentId" column="tent_id" jdbcType="VARCHAR"/>
+        <result property="crtTime" column="crt_time" jdbcType="TIMESTAMP"/>
+        <result property="crtUser" column="crt_user" jdbcType="VARCHAR"/>
+        <result property="crtHost" column="crt_host" jdbcType="VARCHAR"/>
+        <result property="updTime" column="upd_time" jdbcType="TIMESTAMP"/>
+        <result property="updUser" column="upd_user" jdbcType="VARCHAR"/>
+        <result property="updHost" column="upd_host" jdbcType="VARCHAR"/>
+        <result property="syncStatus" column="sync_status" jdbcType="VARCHAR"/>
+        <result property="syncFailureReason" column="sync_failure_reason" jdbcType="VARCHAR"/>
+        <result property="nbDeviceId" column="nb_device_id" jdbcType="VARCHAR"/>
+        <result property="bindingStatus" column="binding_status" jdbcType="INTEGER"/>
+        <result property="isTest" column="is_test" jdbcType="INTEGER"/>
+        <result property="videoPlatform" column="video_platform" jdbcType="VARCHAR"/>
+        <result property="videoChannelid" column="video_channelId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="DeviceRegisterMap">
+        select
+          id, project_id, project_name, application_id, application_name, tenant_id, device_type_id, device_type_name, device_supplier_id, device_dict_id, device_name, device_id, device_series_number, hardware_version_number, software_version_number, protocol_version, device_ccid, device_imei, longitude, latitude, networking_type, sim_package, unit_name, address, upload_interval, last_heartbeat_time, online_status, status, police_status, service_expiration_time, battery, signal_strength, sim_abnormal, is_upgrade, create_time, update_time, company_id, tent_id, crt_time, crt_user, crt_host, upd_time, upd_user, upd_host, sync_status, sync_failure_reason, nb_device_id, binding_status, is_test, video_platform, video_channelId
+        from device_register
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="DeviceRegisterMap">
+        select
+          id, project_id, project_name, application_id, application_name, tenant_id, device_type_id, device_type_name, device_supplier_id, device_dict_id, device_name, device_id, device_series_number, hardware_version_number, software_version_number, protocol_version, device_ccid, device_imei, longitude, latitude, networking_type, sim_package, unit_name, address, upload_interval, last_heartbeat_time, online_status, status, police_status, service_expiration_time, battery, signal_strength, sim_abnormal, is_upgrade, create_time, update_time, company_id, tent_id, crt_time, crt_user, crt_host, upd_time, upd_user, upd_host, sync_status, sync_failure_reason, nb_device_id, binding_status, is_test, video_platform, video_channelId
+        from device_register
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="projectName != null and projectName != ''">
+                and project_name = #{projectName}
+            </if>
+            <if test="applicationId != null">
+                and application_id = #{applicationId}
+            </if>
+            <if test="applicationName != null and applicationName != ''">
+                and application_name = #{applicationName}
+            </if>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="deviceTypeId != null">
+                and device_type_id = #{deviceTypeId}
+            </if>
+            <if test="deviceTypeName != null and deviceTypeName != ''">
+                and device_type_name = #{deviceTypeName}
+            </if>
+            <if test="deviceSupplierId != null">
+                and device_supplier_id = #{deviceSupplierId}
+            </if>
+            <if test="deviceDictId != null">
+                and device_dict_id = #{deviceDictId}
+            </if>
+            <if test="deviceName != null and deviceName != ''">
+                and device_name = #{deviceName}
+            </if>
+            <if test="deviceId != null and deviceId != ''">
+                and device_id = #{deviceId}
+            </if>
+            <if test="deviceSeriesNumber != null and deviceSeriesNumber != ''">
+                and device_series_number = #{deviceSeriesNumber}
+            </if>
+            <if test="hardwareVersionNumber != null and hardwareVersionNumber != ''">
+                and hardware_version_number = #{hardwareVersionNumber}
+            </if>
+            <if test="softwareVersionNumber != null and softwareVersionNumber != ''">
+                and software_version_number = #{softwareVersionNumber}
+            </if>
+            <if test="protocolVersion != null and protocolVersion != ''">
+                and protocol_version = #{protocolVersion}
+            </if>
+            <if test="deviceCcid != null and deviceCcid != ''">
+                and device_ccid = #{deviceCcid}
+            </if>
+            <if test="deviceImei != null and deviceImei != ''">
+                and device_imei = #{deviceImei}
+            </if>
+            <if test="longitude != null and longitude != ''">
+                and longitude = #{longitude}
+            </if>
+            <if test="latitude != null and latitude != ''">
+                and latitude = #{latitude}
+            </if>
+            <if test="networkingType != null and networkingType != ''">
+                and networking_type = #{networkingType}
+            </if>
+            <if test="simPackage != null and simPackage != ''">
+                and sim_package = #{simPackage}
+            </if>
+            <if test="unitName != null and unitName != ''">
+                and unit_name = #{unitName}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="uploadInterval != null">
+                and upload_interval = #{uploadInterval}
+            </if>
+            <if test="lastHeartbeatTime != null">
+                and last_heartbeat_time = #{lastHeartbeatTime}
+            </if>
+            <if test="onlineStatus != null">
+                and online_status = #{onlineStatus}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="policeStatus != null">
+                and police_status = #{policeStatus}
+            </if>
+            <if test="serviceExpirationTime != null">
+                and service_expiration_time = #{serviceExpirationTime}
+            </if>
+            <if test="battery != null and battery != ''">
+                and battery = #{battery}
+            </if>
+            <if test="signalStrength != null and signalStrength != ''">
+                and signal_strength = #{signalStrength}
+            </if>
+            <if test="simAbnormal != null">
+                and sim_abnormal = #{simAbnormal}
+            </if>
+            <if test="isUpgrade != null">
+                and is_upgrade = #{isUpgrade}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="companyId != null and companyId != ''">
+                and company_id = #{companyId}
+            </if>
+            <if test="tentId != null and tentId != ''">
+                and tent_id = #{tentId}
+            </if>
+            <if test="crtTime != null">
+                and crt_time = #{crtTime}
+            </if>
+            <if test="crtUser != null and crtUser != ''">
+                and crt_user = #{crtUser}
+            </if>
+            <if test="crtHost != null and crtHost != ''">
+                and crt_host = #{crtHost}
+            </if>
+            <if test="updTime != null">
+                and upd_time = #{updTime}
+            </if>
+            <if test="updUser != null and updUser != ''">
+                and upd_user = #{updUser}
+            </if>
+            <if test="updHost != null and updHost != ''">
+                and upd_host = #{updHost}
+            </if>
+            <if test="syncStatus != null">
+                and sync_status = #{syncStatus}
+            </if>
+            <if test="syncFailureReason != null and syncFailureReason != ''">
+                and sync_failure_reason = #{syncFailureReason}
+            </if>
+            <if test="nbDeviceId != null and nbDeviceId != ''">
+                and nb_device_id = #{nbDeviceId}
+            </if>
+            <if test="bindingStatus != null">
+                and binding_status = #{bindingStatus}
+            </if>
+            <if test="isTest != null">
+                and is_test = #{isTest}
+            </if>
+            <if test="videoPlatform != null and videoPlatform != ''">
+                and video_platform = #{videoPlatform}
+            </if>
+            <if test="videoChannelid != null and videoChannelid != ''">
+                and video_channelId = #{videoChannelid}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from device_register
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="projectName != null and projectName != ''">
+                and project_name = #{projectName}
+            </if>
+            <if test="applicationId != null">
+                and application_id = #{applicationId}
+            </if>
+            <if test="applicationName != null and applicationName != ''">
+                and application_name = #{applicationName}
+            </if>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="deviceTypeId != null">
+                and device_type_id = #{deviceTypeId}
+            </if>
+            <if test="deviceTypeName != null and deviceTypeName != ''">
+                and device_type_name = #{deviceTypeName}
+            </if>
+            <if test="deviceSupplierId != null">
+                and device_supplier_id = #{deviceSupplierId}
+            </if>
+            <if test="deviceDictId != null">
+                and device_dict_id = #{deviceDictId}
+            </if>
+            <if test="deviceName != null and deviceName != ''">
+                and device_name = #{deviceName}
+            </if>
+            <if test="deviceId != null and deviceId != ''">
+                and device_id = #{deviceId}
+            </if>
+            <if test="deviceSeriesNumber != null and deviceSeriesNumber != ''">
+                and device_series_number = #{deviceSeriesNumber}
+            </if>
+            <if test="hardwareVersionNumber != null and hardwareVersionNumber != ''">
+                and hardware_version_number = #{hardwareVersionNumber}
+            </if>
+            <if test="softwareVersionNumber != null and softwareVersionNumber != ''">
+                and software_version_number = #{softwareVersionNumber}
+            </if>
+            <if test="protocolVersion != null and protocolVersion != ''">
+                and protocol_version = #{protocolVersion}
+            </if>
+            <if test="deviceCcid != null and deviceCcid != ''">
+                and device_ccid = #{deviceCcid}
+            </if>
+            <if test="deviceImei != null and deviceImei != ''">
+                and device_imei = #{deviceImei}
+            </if>
+            <if test="longitude != null and longitude != ''">
+                and longitude = #{longitude}
+            </if>
+            <if test="latitude != null and latitude != ''">
+                and latitude = #{latitude}
+            </if>
+            <if test="networkingType != null and networkingType != ''">
+                and networking_type = #{networkingType}
+            </if>
+            <if test="simPackage != null and simPackage != ''">
+                and sim_package = #{simPackage}
+            </if>
+            <if test="unitName != null and unitName != ''">
+                and unit_name = #{unitName}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="uploadInterval != null">
+                and upload_interval = #{uploadInterval}
+            </if>
+            <if test="lastHeartbeatTime != null">
+                and last_heartbeat_time = #{lastHeartbeatTime}
+            </if>
+            <if test="onlineStatus != null">
+                and online_status = #{onlineStatus}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="policeStatus != null">
+                and police_status = #{policeStatus}
+            </if>
+            <if test="serviceExpirationTime != null">
+                and service_expiration_time = #{serviceExpirationTime}
+            </if>
+            <if test="battery != null and battery != ''">
+                and battery = #{battery}
+            </if>
+            <if test="signalStrength != null and signalStrength != ''">
+                and signal_strength = #{signalStrength}
+            </if>
+            <if test="simAbnormal != null">
+                and sim_abnormal = #{simAbnormal}
+            </if>
+            <if test="isUpgrade != null">
+                and is_upgrade = #{isUpgrade}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="companyId != null and companyId != ''">
+                and company_id = #{companyId}
+            </if>
+            <if test="tentId != null and tentId != ''">
+                and tent_id = #{tentId}
+            </if>
+            <if test="crtTime != null">
+                and crt_time = #{crtTime}
+            </if>
+            <if test="crtUser != null and crtUser != ''">
+                and crt_user = #{crtUser}
+            </if>
+            <if test="crtHost != null and crtHost != ''">
+                and crt_host = #{crtHost}
+            </if>
+            <if test="updTime != null">
+                and upd_time = #{updTime}
+            </if>
+            <if test="updUser != null and updUser != ''">
+                and upd_user = #{updUser}
+            </if>
+            <if test="updHost != null and updHost != ''">
+                and upd_host = #{updHost}
+            </if>
+            <if test="syncStatus != null">
+                and sync_status = #{syncStatus}
+            </if>
+            <if test="syncFailureReason != null and syncFailureReason != ''">
+                and sync_failure_reason = #{syncFailureReason}
+            </if>
+            <if test="nbDeviceId != null and nbDeviceId != ''">
+                and nb_device_id = #{nbDeviceId}
+            </if>
+            <if test="bindingStatus != null">
+                and binding_status = #{bindingStatus}
+            </if>
+            <if test="isTest != null">
+                and is_test = #{isTest}
+            </if>
+            <if test="videoPlatform != null and videoPlatform != ''">
+                and video_platform = #{videoPlatform}
+            </if>
+            <if test="videoChannelid != null and videoChannelid != ''">
+                and video_channelId = #{videoChannelid}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into device_register(project_id, project_name, application_id, application_name, tenant_id, device_type_id, device_type_name, device_supplier_id, device_dict_id, device_name, device_id, device_series_number, hardware_version_number, software_version_number, protocol_version, device_ccid, device_imei, longitude, latitude, networking_type, sim_package, unit_name, address, upload_interval, last_heartbeat_time, online_status, status, police_status, service_expiration_time, battery, signal_strength, sim_abnormal, is_upgrade, create_time, update_time, company_id, tent_id, crt_time, crt_user, crt_host, upd_time, upd_user, upd_host, sync_status, sync_failure_reason, nb_device_id, binding_status, is_test, video_platform, video_channelId)
+        values (#{projectId}, #{projectName}, #{applicationId}, #{applicationName}, #{tenantId}, #{deviceTypeId}, #{deviceTypeName}, #{deviceSupplierId}, #{deviceDictId}, #{deviceName}, #{deviceId}, #{deviceSeriesNumber}, #{hardwareVersionNumber}, #{softwareVersionNumber}, #{protocolVersion}, #{deviceCcid}, #{deviceImei}, #{longitude}, #{latitude}, #{networkingType}, #{simPackage}, #{unitName}, #{address}, #{uploadInterval}, #{lastHeartbeatTime}, #{onlineStatus}, #{status}, #{policeStatus}, #{serviceExpirationTime}, #{battery}, #{signalStrength}, #{simAbnormal}, #{isUpgrade}, #{createTime}, #{updateTime}, #{companyId}, #{tentId}, #{crtTime}, #{crtUser}, #{crtHost}, #{updTime}, #{updUser}, #{updHost}, #{syncStatus}, #{syncFailureReason}, #{nbDeviceId}, #{bindingStatus}, #{isTest}, #{videoPlatform}, #{videoChannelid})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into device_register(project_id, project_name, application_id, application_name, tenant_id, device_type_id, device_type_name, device_supplier_id, device_dict_id, device_name, device_id, device_series_number, hardware_version_number, software_version_number, protocol_version, device_ccid, device_imei, longitude, latitude, networking_type, sim_package, unit_name, address, upload_interval, last_heartbeat_time, online_status, status, police_status, service_expiration_time, battery, signal_strength, sim_abnormal, is_upgrade, create_time, update_time, company_id, tent_id, crt_time, crt_user, crt_host, upd_time, upd_user, upd_host, sync_status, sync_failure_reason, nb_device_id, binding_status, is_test, video_platform, video_channelId)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.projectId}, #{entity.projectName}, #{entity.applicationId}, #{entity.applicationName}, #{entity.tenantId}, #{entity.deviceTypeId}, #{entity.deviceTypeName}, #{entity.deviceSupplierId}, #{entity.deviceDictId}, #{entity.deviceName}, #{entity.deviceId}, #{entity.deviceSeriesNumber}, #{entity.hardwareVersionNumber}, #{entity.softwareVersionNumber}, #{entity.protocolVersion}, #{entity.deviceCcid}, #{entity.deviceImei}, #{entity.longitude}, #{entity.latitude}, #{entity.networkingType}, #{entity.simPackage}, #{entity.unitName}, #{entity.address}, #{entity.uploadInterval}, #{entity.lastHeartbeatTime}, #{entity.onlineStatus}, #{entity.status}, #{entity.policeStatus}, #{entity.serviceExpirationTime}, #{entity.battery}, #{entity.signalStrength}, #{entity.simAbnormal}, #{entity.isUpgrade}, #{entity.createTime}, #{entity.updateTime}, #{entity.companyId}, #{entity.tentId}, #{entity.crtTime}, #{entity.crtUser}, #{entity.crtHost}, #{entity.updTime}, #{entity.updUser}, #{entity.updHost}, #{entity.syncStatus}, #{entity.syncFailureReason}, #{entity.nbDeviceId}, #{entity.bindingStatus}, #{entity.isTest}, #{entity.videoPlatform}, #{entity.videoChannelid})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into device_register(project_id, project_name, application_id, application_name, tenant_id, device_type_id, device_type_name, device_supplier_id, device_dict_id, device_name, device_id, device_series_number, hardware_version_number, software_version_number, protocol_version, device_ccid, device_imei, longitude, latitude, networking_type, sim_package, unit_name, address, upload_interval, last_heartbeat_time, online_status, status, police_status, service_expiration_time, battery, signal_strength, sim_abnormal, is_upgrade, create_time, update_time, company_id, tent_id, crt_time, crt_user, crt_host, upd_time, upd_user, upd_host, sync_status, sync_failure_reason, nb_device_id, binding_status, is_test, video_platform, video_channelId)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.projectId}, #{entity.projectName}, #{entity.applicationId}, #{entity.applicationName}, #{entity.tenantId}, #{entity.deviceTypeId}, #{entity.deviceTypeName}, #{entity.deviceSupplierId}, #{entity.deviceDictId}, #{entity.deviceName}, #{entity.deviceId}, #{entity.deviceSeriesNumber}, #{entity.hardwareVersionNumber}, #{entity.softwareVersionNumber}, #{entity.protocolVersion}, #{entity.deviceCcid}, #{entity.deviceImei}, #{entity.longitude}, #{entity.latitude}, #{entity.networkingType}, #{entity.simPackage}, #{entity.unitName}, #{entity.address}, #{entity.uploadInterval}, #{entity.lastHeartbeatTime}, #{entity.onlineStatus}, #{entity.status}, #{entity.policeStatus}, #{entity.serviceExpirationTime}, #{entity.battery}, #{entity.signalStrength}, #{entity.simAbnormal}, #{entity.isUpgrade}, #{entity.createTime}, #{entity.updateTime}, #{entity.companyId}, #{entity.tentId}, #{entity.crtTime}, #{entity.crtUser}, #{entity.crtHost}, #{entity.updTime}, #{entity.updUser}, #{entity.updHost}, #{entity.syncStatus}, #{entity.syncFailureReason}, #{entity.nbDeviceId}, #{entity.bindingStatus}, #{entity.isTest}, #{entity.videoPlatform}, #{entity.videoChannelid})
+        </foreach>
+        on duplicate key update
+        project_id = values(project_id),
+        project_name = values(project_name),
+        application_id = values(application_id),
+        application_name = values(application_name),
+        tenant_id = values(tenant_id),
+        device_type_id = values(device_type_id),
+        device_type_name = values(device_type_name),
+        device_supplier_id = values(device_supplier_id),
+        device_dict_id = values(device_dict_id),
+        device_name = values(device_name),
+        device_id = values(device_id),
+        device_series_number = values(device_series_number),
+        hardware_version_number = values(hardware_version_number),
+        software_version_number = values(software_version_number),
+        protocol_version = values(protocol_version),
+        device_ccid = values(device_ccid),
+        device_imei = values(device_imei),
+        longitude = values(longitude),
+        latitude = values(latitude),
+        networking_type = values(networking_type),
+        sim_package = values(sim_package),
+        unit_name = values(unit_name),
+        address = values(address),
+        upload_interval = values(upload_interval),
+        last_heartbeat_time = values(last_heartbeat_time),
+        online_status = values(online_status),
+        status = values(status),
+        police_status = values(police_status),
+        service_expiration_time = values(service_expiration_time),
+        battery = values(battery),
+        signal_strength = values(signal_strength),
+        sim_abnormal = values(sim_abnormal),
+        is_upgrade = values(is_upgrade),
+        create_time = values(create_time),
+        update_time = values(update_time),
+        company_id = values(company_id),
+        tent_id = values(tent_id),
+        crt_time = values(crt_time),
+        crt_user = values(crt_user),
+        crt_host = values(crt_host),
+        upd_time = values(upd_time),
+        upd_user = values(upd_user),
+        upd_host = values(upd_host),
+        sync_status = values(sync_status),
+        sync_failure_reason = values(sync_failure_reason),
+        nb_device_id = values(nb_device_id),
+        binding_status = values(binding_status),
+        is_test = values(is_test),
+        video_platform = values(video_platform),
+        video_channelId = values(video_channelId)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update device_register
+        <set>
+            <if test="projectId != null and projectId != ''">
+                project_id = #{projectId},
+            </if>
+            <if test="projectName != null and projectName != ''">
+                project_name = #{projectName},
+            </if>
+            <if test="applicationId != null">
+                application_id = #{applicationId},
+            </if>
+            <if test="applicationName != null and applicationName != ''">
+                application_name = #{applicationName},
+            </if>
+            <if test="tenantId != null">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="deviceTypeId != null">
+                device_type_id = #{deviceTypeId},
+            </if>
+            <if test="deviceTypeName != null and deviceTypeName != ''">
+                device_type_name = #{deviceTypeName},
+            </if>
+            <if test="deviceSupplierId != null">
+                device_supplier_id = #{deviceSupplierId},
+            </if>
+            <if test="deviceDictId != null">
+                device_dict_id = #{deviceDictId},
+            </if>
+            <if test="deviceName != null and deviceName != ''">
+                device_name = #{deviceName},
+            </if>
+            <if test="deviceId != null and deviceId != ''">
+                device_id = #{deviceId},
+            </if>
+            <if test="deviceSeriesNumber != null and deviceSeriesNumber != ''">
+                device_series_number = #{deviceSeriesNumber},
+            </if>
+            <if test="hardwareVersionNumber != null and hardwareVersionNumber != ''">
+                hardware_version_number = #{hardwareVersionNumber},
+            </if>
+            <if test="softwareVersionNumber != null and softwareVersionNumber != ''">
+                software_version_number = #{softwareVersionNumber},
+            </if>
+            <if test="protocolVersion != null and protocolVersion != ''">
+                protocol_version = #{protocolVersion},
+            </if>
+            <if test="deviceCcid != null and deviceCcid != ''">
+                device_ccid = #{deviceCcid},
+            </if>
+            <if test="deviceImei != null and deviceImei != ''">
+                device_imei = #{deviceImei},
+            </if>
+            <if test="longitude != null and longitude != ''">
+                longitude = #{longitude},
+            </if>
+            <if test="latitude != null and latitude != ''">
+                latitude = #{latitude},
+            </if>
+            <if test="networkingType != null and networkingType != ''">
+                networking_type = #{networkingType},
+            </if>
+            <if test="simPackage != null and simPackage != ''">
+                sim_package = #{simPackage},
+            </if>
+            <if test="unitName != null and unitName != ''">
+                unit_name = #{unitName},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="uploadInterval != null">
+                upload_interval = #{uploadInterval},
+            </if>
+            <if test="lastHeartbeatTime != null">
+                last_heartbeat_time = #{lastHeartbeatTime},
+            </if>
+            <if test="onlineStatus != null">
+                online_status = #{onlineStatus},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="policeStatus != null">
+                police_status = #{policeStatus},
+            </if>
+            <if test="serviceExpirationTime != null">
+                service_expiration_time = #{serviceExpirationTime},
+            </if>
+            <if test="battery != null and battery != ''">
+                battery = #{battery},
+            </if>
+            <if test="signalStrength != null and signalStrength != ''">
+                signal_strength = #{signalStrength},
+            </if>
+            <if test="simAbnormal != null">
+                sim_abnormal = #{simAbnormal},
+            </if>
+            <if test="isUpgrade != null">
+                is_upgrade = #{isUpgrade},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="companyId != null and companyId != ''">
+                company_id = #{companyId},
+            </if>
+            <if test="tentId != null and tentId != ''">
+                tent_id = #{tentId},
+            </if>
+            <if test="crtTime != null">
+                crt_time = #{crtTime},
+            </if>
+            <if test="crtUser != null and crtUser != ''">
+                crt_user = #{crtUser},
+            </if>
+            <if test="crtHost != null and crtHost != ''">
+                crt_host = #{crtHost},
+            </if>
+            <if test="updTime != null">
+                upd_time = #{updTime},
+            </if>
+            <if test="updUser != null and updUser != ''">
+                upd_user = #{updUser},
+            </if>
+            <if test="updHost != null and updHost != ''">
+                upd_host = #{updHost},
+            </if>
+            <if test="syncStatus != null">
+                sync_status = #{syncStatus},
+            </if>
+            <if test="syncFailureReason != null and syncFailureReason != ''">
+                sync_failure_reason = #{syncFailureReason},
+            </if>
+            <if test="nbDeviceId != null and nbDeviceId != ''">
+                nb_device_id = #{nbDeviceId},
+            </if>
+            <if test="bindingStatus != null">
+                binding_status = #{bindingStatus},
+            </if>
+            <if test="isTest != null">
+                is_test = #{isTest},
+            </if>
+            <if test="videoPlatform != null and videoPlatform != ''">
+                video_platform = #{videoPlatform},
+            </if>
+            <if test="videoChannelid != null and videoChannelid != ''">
+                video_channelId = #{videoChannelid},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateByDeviceId">
+        update device_register
+        <set>
+            <if test="projectId != null and projectId != ''">
+                project_id = #{projectId},
+            </if>
+            <if test="projectName != null and projectName != ''">
+                project_name = #{projectName},
+            </if>
+            <if test="applicationId != null">
+                application_id = #{applicationId},
+            </if>
+            <if test="applicationName != null and applicationName != ''">
+                application_name = #{applicationName},
+            </if>
+            <if test="tenantId != null">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="deviceTypeId != null">
+                device_type_id = #{deviceTypeId},
+            </if>
+            <if test="deviceTypeName != null and deviceTypeName != ''">
+                device_type_name = #{deviceTypeName},
+            </if>
+            <if test="deviceSupplierId != null">
+                device_supplier_id = #{deviceSupplierId},
+            </if>
+            <if test="deviceDictId != null">
+                device_dict_id = #{deviceDictId},
+            </if>
+            <if test="deviceName != null and deviceName != ''">
+                device_name = #{deviceName},
+            </if>
+            <if test="deviceSeriesNumber != null and deviceSeriesNumber != ''">
+                device_series_number = #{deviceSeriesNumber},
+            </if>
+            <if test="hardwareVersionNumber != null and hardwareVersionNumber != ''">
+                hardware_version_number = #{hardwareVersionNumber},
+            </if>
+            <if test="softwareVersionNumber != null and softwareVersionNumber != ''">
+                software_version_number = #{softwareVersionNumber},
+            </if>
+            <if test="protocolVersion != null and protocolVersion != ''">
+                protocol_version = #{protocolVersion},
+            </if>
+            <if test="deviceCcid != null and deviceCcid != ''">
+                device_ccid = #{deviceCcid},
+            </if>
+            <if test="deviceImei != null and deviceImei != ''">
+                device_imei = #{deviceImei},
+            </if>
+            <if test="longitude != null and longitude != ''">
+                longitude = #{longitude},
+            </if>
+            <if test="latitude != null and latitude != ''">
+                latitude = #{latitude},
+            </if>
+            <if test="networkingType != null and networkingType != ''">
+                networking_type = #{networkingType},
+            </if>
+            <if test="simPackage != null and simPackage != ''">
+                sim_package = #{simPackage},
+            </if>
+            <if test="unitName != null and unitName != ''">
+                unit_name = #{unitName},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="uploadInterval != null">
+                upload_interval = #{uploadInterval},
+            </if>
+            <if test="lastHeartbeatTime != null">
+                last_heartbeat_time = #{lastHeartbeatTime},
+            </if>
+            <if test="onlineStatus != null">
+                online_status = #{onlineStatus},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="policeStatus != null">
+                police_status = #{policeStatus},
+            </if>
+            <if test="serviceExpirationTime != null">
+                service_expiration_time = #{serviceExpirationTime},
+            </if>
+            <if test="battery != null and battery != ''">
+                battery = #{battery},
+            </if>
+            <if test="signalStrength != null and signalStrength != ''">
+                signal_strength = #{signalStrength},
+            </if>
+            <if test="simAbnormal != null">
+                sim_abnormal = #{simAbnormal},
+            </if>
+            <if test="isUpgrade != null">
+                is_upgrade = #{isUpgrade},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="companyId != null and companyId != ''">
+                company_id = #{companyId},
+            </if>
+            <if test="tentId != null and tentId != ''">
+                tent_id = #{tentId},
+            </if>
+            <if test="crtTime != null">
+                crt_time = #{crtTime},
+            </if>
+            <if test="crtUser != null and crtUser != ''">
+                crt_user = #{crtUser},
+            </if>
+            <if test="crtHost != null and crtHost != ''">
+                crt_host = #{crtHost},
+            </if>
+            <if test="updTime != null">
+                upd_time = #{updTime},
+            </if>
+            <if test="updUser != null and updUser != ''">
+                upd_user = #{updUser},
+            </if>
+            <if test="updHost != null and updHost != ''">
+                upd_host = #{updHost},
+            </if>
+            <if test="syncStatus != null">
+                sync_status = #{syncStatus},
+            </if>
+            <if test="syncFailureReason != null and syncFailureReason != ''">
+                sync_failure_reason = #{syncFailureReason},
+            </if>
+            <if test="nbDeviceId != null and nbDeviceId != ''">
+                nb_device_id = #{nbDeviceId},
+            </if>
+            <if test="bindingStatus != null">
+                binding_status = #{bindingStatus},
+            </if>
+            <if test="isTest != null">
+                is_test = #{isTest},
+            </if>
+            <if test="videoPlatform != null and videoPlatform != ''">
+                video_platform = #{videoPlatform},
+            </if>
+            <if test="videoChannelid != null and videoChannelid != ''">
+                video_channelId = #{videoChannelid},
+            </if>
+        </set>
+        where device_id = #{deviceId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from device_register where id = #{id}
+    </delete>
+
+    <update id="updateBatchDeviceId">
+        update device_register
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="last_heartbeat_time = case" suffix="end,">
+                <foreach collection="list" item="item">
+                    <if test="item.lastHeartbeatTime != null">
+                        when device_id = #{item.deviceId} then #{item.lastHeartbeatTime}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where device_id in
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item.deviceId}
+        </foreach>
+    </update>
+</mapper>
+
